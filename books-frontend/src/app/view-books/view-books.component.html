@@ -1,0 +1,24 @@
+<h2>View Books</h2>
+<p *ngIf="message">{{ message }}</p>
+
+<div *ngIf="role === 'author'">
+  <h3>Books Created By You</h3>
+  <ul>
+    <li *ngFor="let book of myBooks">
+      <strong>{{ book.title }}</strong> by {{ book.author }}
+    </li>
+  </ul>
+</div>
+
+<h3>All Books</h3>
+<ul>
+  <li *ngFor="let book of books">
+    <strong>{{ book.title }}</strong> by {{ book.author }}
+  </li>
+</ul>
+
+<div *ngIf="role === 'author' || role === 'viewer'">
+  <h3>Search Books</h3>
+  <input [(ngModel)]="searchTerm" placeholder="Search by title or author" />
+  <button (click)="searchBooks()">Search</button>
+</div>

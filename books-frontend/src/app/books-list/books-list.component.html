@@ -1,0 +1,25 @@
+<h2>Books List</h2>
+<p *ngIf="message">{{ message }}</p>
+<button *ngIf="role === 'author'" routerLink="/view-books">View Books</button>
+<ul>
+  <li *ngFor="let book of books">
+    <div *ngIf="editingBookId !== book.id">
+      <strong>{{ book.title }}</strong> by {{ book.author }}
+      <button *ngIf="role === 'author' || role === 'admin'" (click)="startEditBook(book)">Edit</button>
+      <button *ngIf="role === 'author' || role === 'admin'" (click)="deleteBook(book.id)">Delete</button>
+    </div>
+    <div *ngIf="editingBookId === book.id">
+      <input [(ngModel)]="editBookData.title" placeholder="Title" />
+      <input [(ngModel)]="editBookData.author" placeholder="Author" />
+      <button (click)="submitEditBook(book.id)">Save</button>
+      <button (click)="cancelEditBook()">Cancel</button>
+    </div>
+  </li>
+</ul>
+
+<div *ngIf="role === 'author' || role === 'admin'">
+  <h3>Add Book</h3>
+  <input [(ngModel)]="newBook.title" placeholder="Title" />
+  <input [(ngModel)]="newBook.author" placeholder="Author" />
+  <button (click)="submitAddBook()">Add Book</button>
+</div>
